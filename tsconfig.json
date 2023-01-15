@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "ES2022",
+    "target": "es2022",
+    "allowJs": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outDir": "./exports",
+    "declaration": true,
+    "declarationDir": "./exports/typings",
+    "moduleResolution":"NodeNext"
+  },
+  "include": [
+    "./src/**/*",
+    "./src/types.d.ts"
+  ],
+  "exclude": ["node_modules"]
+}

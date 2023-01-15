@@ -1,0 +1,32 @@
+{
+  "name": "@leofcoin/codecs",
+  "version": "1.0.0",
+  "description": "Get/set codecs from one place also contains all known codecs",
+  "exports": {
+    ".": "./exports/index.js",
+    "./codecs": "./exports/codecs.js",
+    "./utils": "./exports/utils.js"
+  },
+  "type": "module",
+  "typings": "./exports/typings",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VandeurenGlenn/codecs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VandeurenGlenn/codecs/issues"
+  },
+  "homepage": "https://github.com/VandeurenGlenn/codecs#readme",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.0.0",
+    "rollup": "^3.10.0",
+    "tslib": "^2.4.1"
+  }
+}
