@@ -1,29 +1,27 @@
 import codecs from './codecs.js'
-
-globalThis.peernet = globalThis.peernet || {}
-globalThis.peernet.codecs = globalThis.peernet.codecs as {} || {}
+globalThis.peernetCodecs = globalThis.peernetCodecs as {} || {}
 
 type codecObject = {name: string, hashAlg: string, codec: string}
 
 const addCodec = (codecInput: codecObject) => {
   let { hashAlg, codec, name } = codecInput
-  if (!globalThis.peernet.codecs[name]) globalThis.peernet.codecs[name] = {
+  if (!globalThis.peernetCodecs[name]) globalThis.peernetCodecs[name] = {
     hashAlg,
     codec: parseInt(codec, 16)
   }
 }
 
-const getCodec = (name: string): codecObject => globalThis.peernet.codecs[name]
+const getCodec = (name: string): codecObject => globalThis.peernetCodecs[name]
 
 const getCodecName = (codec: number): string | undefined => {
-  return Object.keys(globalThis.peernet.codecs).reduce((p, c) => {
-    const item = globalThis.peernet.codecs[c]
+  return Object.keys(globalThis.peernetCodecs).reduce((p, c) => {
+    const item = globalThis.peernetCodecs[c]
     if (item.codec === codec) return c;
     else return p;
   }, undefined)
 }
 
-const getCodecByName = (name: string): codecObject => globalThis.peernet.codecs[name]
+const getCodecByName = (name: string): codecObject => globalThis.peernetCodecs[name]
 
 const getHashAlg = (name: string | number): string => {
   if (typeof name === 'number') return getCodecByName(getCodecName(name)).hashAlg
@@ -53,6 +51,6 @@ export default {
   getHashAlg,
   getCodecName,
   validateCodec,
-  codecs: globalThis.peernet.codecs
+  codecs: globalThis.peernetCodecs
 }
 
