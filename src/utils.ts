@@ -7,7 +7,7 @@ const addCodec = (codecInput: codecObject) => {
   let { hashAlg, codec, name } = codecInput
   if (!globalThis.peernetCodecs[name]) globalThis.peernetCodecs[name] = {
     hashAlg,
-    codec: isNaN(codec as number) ? parseInt(codec as string, 16) : codec
+    codec: typeof codec === 'string' ? parseInt(codec, 16) : codec
   }
 }
 
