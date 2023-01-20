@@ -1,17 +1,20 @@
 import codecs from './codecs.js'
 globalThis.peernetCodecs = globalThis.peernetCodecs as {} || {}
 
-type codecObject = {name: string, hashAlg: string, codec: string}
+type codecObject = {name: string, hashAlg: string, codec: string | number}
 
 const addCodec = (codecInput: codecObject) => {
   let { hashAlg, codec, name } = codecInput
   if (!globalThis.peernetCodecs[name]) globalThis.peernetCodecs[name] = {
     hashAlg,
-    codec: parseInt(codec, 16)
+    codec: isNaN(codec as number) ? parseInt(codec as string, 16) : codec
   }
 }
 
-const getCodec = (name: string): codecObject => globalThis.peernetCodecs[name]
+const getCodec = (name: string): number => {
+  if (typeof name === 'number') return name
+  return getCodecByName(name).codec as number
+}
 
 const getCodecName = (codec: number): string | undefined => {
   return Object.keys(globalThis.peernetCodecs).reduce((p, c) => {

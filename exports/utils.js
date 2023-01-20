@@ -6,10 +6,14 @@ const addCodec = (codecInput) => {
     if (!globalThis.peernetCodecs[name])
         globalThis.peernetCodecs[name] = {
             hashAlg,
-            codec: parseInt(codec, 16)
+            codec: isNaN(codec) ? parseInt(codec, 16) : codec
         };
 };
-const getCodec = (name) => globalThis.peernetCodecs[name];
+const getCodec = (name) => {
+    if (typeof name === 'number')
+        return name;
+    return getCodecByName(name).codec;
+};
 const getCodecName = (codec) => {
     return Object.keys(globalThis.peernetCodecs).reduce((p, c) => {
         const item = globalThis.peernetCodecs[c];
