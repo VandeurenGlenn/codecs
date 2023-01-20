@@ -1,6 +1,6 @@
 {
   "name": "@leofcoin/codecs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Get/set codecs from one place also contains all known codecs",
   "exports": {
     ".": "./exports/index.js",
