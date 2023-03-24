@@ -30,6 +30,11 @@ const blockchainCodecs = [
         hashAlg: 'keccak-256'
     },
     {
+        name: 'raw-transaction-message',
+        codec: '0x772746d',
+        hashAlg: 'keccak-256'
+    },
+    {
         name: 'block-message',
         codec: '0x626d',
         hashAlg: 'keccak-256'
@@ -119,14 +124,16 @@ const internalCodecs = [
     }
 ];
 
-const codecs = [
-    ...internalCodecs,
-    ...blockchainCodecs,
-    {
+var social = [{
         name: 'chat-message',
         codec: '0x70636d',
         hashAlg: 'dbl-keccak-256',
-    }
+    }];
+
+const codecs = [
+    ...internalCodecs,
+    ...blockchainCodecs,
+    ...social
 ];
 
 export { codecs as default };
