@@ -16,6 +16,9 @@
       "types": "./exports/utils.d.ts"
     }
   },
+  "files": [
+    "exports"
+  ],
   "type": "module",
   "scripts": {
     "build": "rollup -c",
