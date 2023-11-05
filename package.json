@@ -3,15 +3,23 @@
   "version": "1.0.4",
   "description": "Get/set codecs from one place also contains all known codecs",
   "exports": {
-    ".": "./exports/index.js",
-    "./codecs": "./exports/codecs.js",
-    "./utils": "./exports/utils.js"
+    ".": {
+      "import": "./exports/index.js",
+      "types": "./exports/index.d.ts"
+    },
+    "./codecs": {
+      "import": "./exports/codecs.js",
+      "types": "./exports/codecs.d.ts"
+    },
+    "./utils": {
+      "import": "./exports/utils.js",
+      "types": "./exports/utils.d.ts"
+    }
   },
   "type": "module",
-  "typings": "./exports/typings",
   "scripts": {
     "build": "rollup -c",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test"
   },
   "repository": {
     "type": "git",
@@ -19,7 +27,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/VandeurenGlenn/codecs/issues"
   },
