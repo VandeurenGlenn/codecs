@@ -1,14 +1,18 @@
-import codecs from './codecs.js'
-globalThis.peernetCodecs = globalThis.peernetCodecs as {} || {}
+import _codecs from './codecs.js'
+const codecs = {}
 
 type codecObject = {name: string, hashAlg: string, codec: string | number}
 
 const addCodec = (codecInput: codecObject) => {
   let { hashAlg, codec, name } = codecInput
-  if (!globalThis.peernetCodecs[name]) globalThis.peernetCodecs[name] = {
+  if (!codecs[name]) codecs[name] = {
     hashAlg,
     codec: typeof codec === 'string' ? parseInt(codec, 16) : codec
   }
+}
+
+for (const codec of _codecs) {
+  addCodec(codec)
 }
 
 const getCodec = (name: string): number => {
@@ -17,14 +21,14 @@ const getCodec = (name: string): number => {
 }
 
 const getCodecName = (codec: number): string | undefined => {
-  return Object.keys(globalThis.peernetCodecs).reduce((p, c) => {
-    const item = globalThis.peernetCodecs[c]
+  return Object.keys(codecs).reduce((p, c) => {
+    const item = codecs[c]
     if (item.codec === codec) return c;
     else return p;
   }, undefined)
 }
 
-const getCodecByName = (name: string): codecObject => globalThis.peernetCodecs[name]
+const getCodecByName = (name: string): codecObject => codecs[name]
 
 const getHashAlg = (name: string | number): string => {
   if (typeof name === 'number') return getCodecByName(getCodecName(name)).hashAlg
@@ -43,17 +47,13 @@ const validateCodec = (codec: codecObject) => {
       throw new Error(`invalid codecInput: ${codec}`)
 }
 
-for (const codec of codecs) {
-  addCodec(codec)
-}
-
-export default {  
+export default {
   isCodec,
   addCodec,
   getCodec,
   getHashAlg,
   getCodecName,
   validateCodec,
-  codecs: globalThis.peernetCodecs
+  codecs: codecs
 }
 
